@@ -43,7 +43,7 @@ class MyCustomFormState extends State<MyCustomForm> {
   @override
   Widget build(BuildContext context) {
     // Build a Form widget using the _formKey created above.
-    //add first name, last name, email, Date of birth
+    //add first name, last name, email, Date of birth, phone number, password, address
 
     final firstNameController = TextEditingController();
     final lastNameController = TextEditingController();
@@ -127,7 +127,7 @@ class MyCustomFormState extends State<MyCustomForm> {
             },
             
           ),
-          //password has to be at least 8 characters
+          //password has to be at least 8 characters and has to contain at least one uppercase letter, one lowercase letter, one number and one special character
           TextFormField(
             controller: passwordController,
             decoration: const InputDecoration(
@@ -139,6 +139,9 @@ class MyCustomFormState extends State<MyCustomForm> {
               }
               if (value.length < 8) {
                 return 'Password must be at least 8 characters';
+              }
+              if (!RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$').hasMatch(value)) {
+                return 'Password must contain at least one uppercase letter, one lowercase letter, one number and one special character';
               }
               return null;
             },
