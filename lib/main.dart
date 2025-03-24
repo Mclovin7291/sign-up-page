@@ -51,7 +51,7 @@ class MyCustomFormState extends State<MyCustomForm> {
     final dateOfBirthController = TextEditingController();
     final phoneNumberController = TextEditingController();
     final passwordController = TextEditingController();
-
+    final addressController = TextEditingController();
 
     
 
@@ -139,6 +139,18 @@ class MyCustomFormState extends State<MyCustomForm> {
               }
               if (value.length < 8) {
                 return 'Password must be at least 8 characters';
+              }
+              return null;
+            },
+          ),
+          TextFormField(
+            controller: addressController,
+            decoration: const InputDecoration(
+              hintText: 'address',
+            ),
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter some text';
               }
               return null;
             },
