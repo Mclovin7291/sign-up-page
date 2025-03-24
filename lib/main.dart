@@ -35,28 +35,10 @@ class MyCustomForm extends StatefulWidget {
 class MyCustomFormState extends State<MyCustomForm> {
   // Create a global key that uniquely identifies the Form widget
   // and allows validation of the form.
-  //
-  // Note: This is a GlobalKey<FormState>,
-  // not a GlobalKey<MyCustomFormState>.
   final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    // Build a Form widget using the _formKey created above.
-    //add first name, last name, email, Date of birth, phone number, password, address
-    
-
-    final firstNameController = TextEditingController();
-    final lastNameController = TextEditingController();
-    final emailController = TextEditingController();
-    final dateOfBirthController = TextEditingController();
-    final phoneNumberController = TextEditingController();
-    final passwordController = TextEditingController();
-    final addressController = TextEditingController();
-
-    
-
-
     return Form(
       key: _formKey,
       child: SingleChildScrollView(
@@ -72,7 +54,6 @@ class MyCustomFormState extends State<MyCustomForm> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       TextFormField(
-                        controller: firstNameController,
                         decoration: const InputDecoration(
                           hintText: 'First Name',
                         ),
@@ -85,7 +66,6 @@ class MyCustomFormState extends State<MyCustomForm> {
                       ),
                       const SizedBox(height: 16),
                       TextFormField(
-                        controller: emailController,
                         decoration: const InputDecoration(
                           hintText: 'Email',
                         ),
@@ -101,7 +81,6 @@ class MyCustomFormState extends State<MyCustomForm> {
                       ),
                       const SizedBox(height: 16),
                       TextFormField(
-                        controller: dateOfBirthController,
                         decoration: const InputDecoration(
                           hintText: 'Date of Birth',
                         ),
@@ -114,7 +93,6 @@ class MyCustomFormState extends State<MyCustomForm> {
                       ),
                       const SizedBox(height: 16),
                       TextFormField(
-                        controller: addressController,
                         decoration: const InputDecoration(
                           hintText: 'Address',
                         ),
@@ -135,7 +113,6 @@ class MyCustomFormState extends State<MyCustomForm> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       TextFormField(
-                        controller: lastNameController,
                         decoration: const InputDecoration(
                           hintText: 'Last Name',
                         ),
@@ -148,7 +125,6 @@ class MyCustomFormState extends State<MyCustomForm> {
                       ),
                       const SizedBox(height: 16),
                       TextFormField(
-                        controller: phoneNumberController,
                         decoration: const InputDecoration(
                           hintText: 'Phone Number',
                         ),
@@ -161,7 +137,6 @@ class MyCustomFormState extends State<MyCustomForm> {
                       ),
                       const SizedBox(height: 16),
                       TextFormField(
-                        controller: passwordController,
                         decoration: const InputDecoration(
                           hintText: 'Password',
                         ),
@@ -189,13 +164,53 @@ class MyCustomFormState extends State<MyCustomForm> {
               child: ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Success')),
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SuccessScreen(),
+                      ),
                     );
                   }
                 },
                 child: const Text('Submit'),
               ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class SuccessScreen extends StatelessWidget {
+  const SuccessScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Welcome!'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            
+            const SizedBox(height: 24),
+            const Text(
+              'Sign Up Successful!',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: () {
+                // Navigate back to the signup form
+                Navigator.pop(context);
+              },
+              child: const Text('Back to Sign Up'),
             ),
           ],
         ),
